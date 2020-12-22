@@ -2,12 +2,12 @@ import requests
 import autheticate
 import generate_random_values
 import random
-import images
+import generate_random_images
 
 description2_list=["In order to understand recursion, one must first understand recursion","Deleted code is debugged code","The best thing about a boolean is even if you are wrong, you are only off by a bit","It is a long established","There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature"]
 
 
-piclist=images.getimagelist()
+piclist=generate_random_images.getimagelist()
 cat_list=[1,2,3,4,5,6,7]
 
 def post_asset(description, tagid, purchasedate, cost, brand, model, serialno):
