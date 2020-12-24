@@ -83,7 +83,7 @@ def generate_random_zipcodes():
 def generate_random_email():
     name=generate_random_first_name()+generate_random_last_name()
     random_num=str(random.randint(1,99999))
-    end_literal="@ensx.com"
+    end_literal="@vizteck.com"
     email=name+random_num+end_literal
     email=email.strip()
     return email.lower()
