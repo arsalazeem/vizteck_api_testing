@@ -1,3 +1,4 @@
+#pip install -r requirements.txt
 import requests
 import autheticate
 import generate_random_values
