@@ -17,10 +17,10 @@ def post_asset(description, tagid, purchasedate, cost, brand, model, serialno):
     payload = {
         "description": random.choice(description2_list),
         "tagId": generate_random_values.generate_phone_number(),
-        "siteId": 2,
-        "locationId":random.choice([3,4,5]),
-        "categoryId": 11,
-        "departmentId": cid,
+        "siteId": random.choice([24,24]),
+        "locationId":random.choice([31,32,33]),
+        "categoryId": random.choice([21,22]),
+        "departmentId": random.choice([300,301,302,303]),
         "purchaseDate":str(generate_random_values.generate_random_date()),
         "cost": generate_random_values.generate_random_zipcodes(),
         "brand": generate_random_values.generate_bad_zip_code(),
@@ -42,13 +42,14 @@ def post_asset(description, tagid, purchasedate, cost, brand, model, serialno):
     }
 
 
-    session = requests.Session()
-    autheticate.auth(session, "arsal.azeem@vizteck.com", "12345678")
+    # session = requests.Session()
+    session=autheticate.auth2("viztecktest@yopmail.com", "12345678")
 
     try:
-        session.post("http://54.186.118.166:3000/api/v1/en/asset/add-asset",data=payload, timeout=0.0000000001)
-    except requests.exceptions.ReadTimeout:
-        pass
+        response=session.post("http://54.186.118.166:3000/api/v1/en/asset/add-asset",data=payload)
+        print(response.content)
+    except Exception as e:
+        print(e)
     # response = session.post("http://54.186.118.166:3000/api/v1/en/asset/add-asset", data=payload)
     # print(response.content)
     # statuscode = response.status_code
@@ -98,7 +99,7 @@ def post_departments(limit,email,password):
 
 
 create_asset(200)
-post_departments(99,"arsal.azeem@vizteck.com","12345678")
+# post_departments(99,"arsal.azeem@vizteck.com","12345678")
 
 # def generic_post (email,password,payload,limit,api):
 #     print("this")
