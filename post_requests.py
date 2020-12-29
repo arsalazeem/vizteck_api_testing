@@ -4,6 +4,8 @@ import autheticate
 import generate_random_values
 import random
 import generate_random_images
+import get_data
+import pdb
 
 description2_list=["In order to understand recursion, one must first understand recursion","Deleted code is debugged code","The best thing about a boolean is even if you are wrong, you are only off by a bit","It is a long established","There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature"]
 
@@ -12,15 +14,16 @@ piclist=generate_random_images.getimagelist()
 cat_list=[1,2,3,4,5,6,7]
 
 def post_asset(description, tagid, purchasedate, cost, brand, model, serialno):
-    cid=random.choice([1, 2, 3, 4, 5, 6, 7,8,9])
-    # print("catagorey id",cid)
+    company_obj=get_data.get_company_id("arsal.azeem@vizteck.com","12345678")
+    # print(get_data.get_company_id("arsal.azeem@vizteck.com","12345678"))
+    pdb.set_trace()
     payload = {
         "description": random.choice(description2_list),
         "tagId": generate_random_values.generate_phone_number(),
-        "siteId": random.choice([24,24]),
+        "siteId": random.choice(company_obj["sites_list"]),
         "locationId":random.choice([31,32,33]),
-        "categoryId": random.choice([21,22]),
-        "departmentId": random.choice([300,301,302,303]),
+        "categoryId": random.choice(company_obj["catagories_list"]),
+        "departmentId": random.choice(company_obj["departments_list"]),
         "purchaseDate":str(generate_random_values.generate_random_date()),
         "cost": generate_random_values.generate_random_zipcodes(),
         "brand": generate_random_values.generate_bad_zip_code(),
