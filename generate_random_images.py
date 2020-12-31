@@ -649,7 +649,7 @@ def getimagelist():
         customlist.append(pic)
 
 
-    print(customlist)
+    # print(customlist)
     return customlist
 
 

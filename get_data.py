@@ -1,7 +1,8 @@
 import autheticate
 import requests
 import base_url
-
+import pdb
+import random
 # dept_list=[]
 # session=requests.Session()
 # session2=autheticate.auth(session,"arsal.azeem@vizteck.com","12345678")
@@ -12,7 +13,7 @@ def get_dept(s):
     response = s.get(base_url.base_url_nesma + "departments")
     global dept_dict
     dept_dict = response.json()
-    print(dept_dict)
+    # print(dept_dict)
 
 
 
@@ -34,11 +35,45 @@ def return_list(list,keyname):
         if i==0:
              temp_sites_list=[]
         temp_sites_list.append(list[i][keyname])
-    print(temp_sites_list)
+    # print(temp_sites_list)
     return temp_sites_list
 
+
+
+def get_sites_list(email,password):
+    locations_id=[]
+    s = autheticate.auth(email, password)
+    response = s.get(base_url.base_url_aw +"company/sites/list")
+    custom_ob=response.json()
+    list_lenght=len(custom_ob["data"]["sitesFound"])
+    temp_list=custom_ob["data"]["sitesFound"]
+    # print(list_lenght)
+    # print(temp_list)
+    for i in range(0,list_lenght):
+        locations_id.append(temp_list[i]["sid"])
+    return locations_id
+
+def get_location_site_id(email,password):
+   location_id=[]
+   site_id=random.choice(get_sites_list(email,password))
+   s = autheticate.auth(email, password)
+   response = s.get(base_url.base_url_aw + "site/locations/"+str(site_id))
+   first_list=response.json()
+   first_list2=first_list["data"]["siteslocationArr"]
+   for i in range(0,len(first_list2)):
+       location_id.append(first_list2[i]["slid"])
+
+   # print(location_id)
+   # pdb.set_trace()
+   locationn_id=random.choice(location_id)
+   return {"site_id":site_id,"location_id":locationn_id}
+
+
+#site/locations/:siteId
+
+
 def get_company_id(email,password):
-    s = autheticate.auth2(email, password)
+    s = autheticate.auth(email, password)
     response = s.get(base_url.base_url_aw+ "departments/sites")
     temp=response.json()
     global sites_list,departments_list,cats_list
@@ -62,3 +97,5 @@ def get_company_id(email,password):
 # get_site_id()
 # print(get_dept_list())
 # print(get_company_id())
+# print(get_sites_list("arsal.azeem@vizteck.com","12345678"))
+# print(get_location_site_id("nnarsalazeem@yopmail.com","12345678"))
