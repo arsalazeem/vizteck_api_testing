@@ -24,7 +24,7 @@ def post_asset(description, tagid, purchasedate, cost, brand, model, serialno):
         "purchaseDate":str(generate_random_values.generate_random_date()),
         "cost": generate_random_values.generate_random_zipcodes(),
         "brand": generate_random_values.generate_bad_zip_code(),
-        "model": generate_random_values.get_random_string(5),
+        "model": ,
         "serialNo": serialno,
         "image":str(random.choice(piclist)),
         "customFields":""
