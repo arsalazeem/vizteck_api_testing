@@ -1,5 +1,5 @@
 import requests
-
+import sys
 
 # def auth(n_requests,eemail,ppassowrd):
 #     payload = {"email": eemail,
@@ -22,6 +22,17 @@ def auth(eemail,ppassowrd):
     # print(temp.content)
     # print("respone messege ends here")
     # print(temp.content)
-    # print(temp.content)
+    # try:
+    if temp.json()["response"] == 400:
+        print(temp.json())
+        print("Please provide valid login credentials.")
+        print("Quiting Program...........")
+        quit()
+    # except:
+    #     if temp.json()["response"] == str(400):
+    #         print("Please provide valid login credentials.")
+    #         print("Quiting Program...........")
+    #         quit()
+
     return session
 

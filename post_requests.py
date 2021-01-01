@@ -3,23 +3,39 @@ import requests
 import autheticate
 import generate_random_values
 import random
+from faker import Faker
 import generate_random_images
 import get_data
 import pdb
 import brand_list
 
+fake=Faker()
 description2_list=["In order to understand recursion, one must first understand recursion","Deleted code is debugged code","The best thing about a boolean is even if you are wrong, you are only off by a bit","It is a long established","There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature"]
 
 
 piclist=generate_random_images.getimagelist()
 cat_list=[1,2,3,4,5,6,7]
 
+
+
+def write_log(description,site_id,location_id,cat_id):
+    with open("log.txt", "a") as file:
+        file.write("*************************************** \n")
+        file.write("Asset Description:" + description + "\n")
+        file.write("Asset Site ID:" + str(site_id) + "\n")
+        file.write("Asset Location ID:" + str(location_id) + "\n")
+        file.write("Asset  Catagorey ID:" + str(cat_id) + "\n")
+        file.write("\n")
+        file.close()
+
+
+
 def post_asset(email,password):
     company_obj=get_data.get_company_id(email,password)
     company_obj2=get_data.get_location_site_id(email,password)
     # pdb.set_trace()
     payload = {
-        "description": brand_list.return_brand(),
+        "description": fake.text(),
         "tagId": generate_random_values.generate_phone_number(),
         "siteId": company_obj2["site_id"],
         "locationId":company_obj2["location_id"],
@@ -30,7 +46,7 @@ def post_asset(email,password):
         "brand": brand_list.return_brand(),
         "model": generate_random_values.get_random_string(5),
         "serialNo": generate_random_values.generate_phone_number(),
-        "image":str(random.choice(piclist)),
+        "image":"https://p2.hiclipart.com/preview/666/313/317/business-strategy-icon-money-icon-management-icon-financial-management-cash-flow-finance-asset-management-accounting-management-accounting-project-management-png-clipart.jpg",
         "customFields":""
         #     {
         #         "name": "Furniture",
@@ -45,7 +61,7 @@ def post_asset(email,password):
         # ]
     }
 
-
+    write_log(payload["description"],payload["siteId"],payload["locationId"],payload["categoryId"])
     # session = requests.Session()
     session=autheticate.auth(email, password)
     # pdb.set_trace()
@@ -87,7 +103,7 @@ def post_departments(limit,email,password):
 
 
 #methods
-create_asset(50,"nnarsalazeem@yopmail.com","12345678")
+create_asset(50,"arsalazeem40@gmail.com","12345678")
 # post_departments(99,"narsalazeem@yopmail.com","12345678")
 
 

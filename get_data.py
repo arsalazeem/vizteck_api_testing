@@ -99,3 +99,4 @@ def get_company_id(email,password):
 # print(get_company_id())
 # print(get_sites_list("arsal.azeem@vizteck.com","12345678"))
 # print(get_location_site_id("nnarsalazeem@yopmail.com","12345678"))
+# get_company_id("arsalazeem40@yopmail.com","12345678")
