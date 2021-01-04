@@ -8,6 +8,7 @@ import generate_random_images
 import get_data
 import pdb
 import brand_list
+import base_url
 
 fake=Faker()
 description2_list=["In order to understand recursion, one must first understand recursion","Deleted code is debugged code","The best thing about a boolean is even if you are wrong, you are only off by a bit","It is a long established","There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature"]
@@ -16,6 +17,10 @@ description2_list=["In order to understand recursion, one must first understand 
 piclist=generate_random_images.getimagelist()
 cat_list=[1,2,3,4,5,6,7]
 
+def return_cost():
+    a = random.choice([1, 2, 3, 4, 5, 6, 7, 8,9])
+    b=random.choice([1,2,3,4,5,6,7,8,9])
+    return int(str(a)+str(b))
 
 
 def write_log(description,site_id,location_id,cat_id):
@@ -42,7 +47,7 @@ def post_asset(email,password):
         "categoryId": random.choice(company_obj["catagories_list"]),
         "departmentId": random.choice(company_obj["departments_list"]),
         "purchaseDate":str(generate_random_values.generate_random_date()),
-        "cost": generate_random_values.generate_random_zipcodes(),
+        "cost": return_cost(),
         "brand": brand_list.return_brand(),
         "model": generate_random_values.get_random_string(5),
         "serialNo": generate_random_values.generate_phone_number(),
@@ -66,7 +71,7 @@ def post_asset(email,password):
     session=autheticate.auth(email, password)
     # pdb.set_trace()
     try:
-        response=session.post("http://54.186.118.166:3000/api/v1/en/asset/add-asset",data=payload, timeout=0.000000001)
+        response=session.post(base_url.base_url_aw+"asset/add-asset",data=payload, timeout=0.000000001)
         print(response.content)
     except Exception as e:
         pass
@@ -85,6 +90,8 @@ def create_asset(asset_range,email,password):
 
 def post_departments(limit,email,password):
     session = autheticate.auth(email, password)
+    print(session)
+    pdb.set_trace()
     print("this")
     for x in range(1,limit+1):
         payload = {
@@ -94,7 +101,7 @@ def post_departments(limit,email,password):
 
 
         # try:
-        response=session.post("http://54.186.118.166:3000/api/v1/en/add/edit/departments", data=payload )
+        response=session.post(base_url.base_url_aw+"add/edit/departments", data=payload )
         print(response.content)
         # except Exception as e:
         #     print(e)
@@ -102,9 +109,10 @@ def post_departments(limit,email,password):
 
 
 
+# print(return_cost())
 #methods
-create_asset(50,"arsalazeem40@gmail.com","12345678")
-# post_departments(99,"narsalazeem@yopmail.com","12345678")
+# create_asset(50,"arsalanazeem@yopmail.com","12345678")
+post_departments(9999,"arsal.azeem@vizteck.com","12345678")
 
 
 

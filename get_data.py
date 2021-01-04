@@ -10,7 +10,7 @@ import random
 # print(session2.get)
 
 def get_dept(s):
-    response = s.get(base_url.base_url_nesma + "departments")
+    response = s.get(base_url.base_url_aw+ "departments")
     global dept_dict
     dept_dict = response.json()
     # print(dept_dict)
@@ -97,6 +97,6 @@ def get_company_id(email,password):
 # get_site_id()
 # print(get_dept_list())
 # print(get_company_id())
-# print(get_sites_list("arsal.azeem@vizteck.com","12345678"))
+# print(get_sites_list("arsalanazeem@yopmail.com","12345678"))
 # print(get_location_site_id("nnarsalazeem@yopmail.com","12345678"))
 # get_company_id("arsalazeem40@yopmail.com","12345678")

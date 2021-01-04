@@ -1,6 +1,6 @@
 import requests
 import sys
-
+import base_url
 # def auth(n_requests,eemail,ppassowrd):
 #     payload = {"email": eemail,
 #                "password": ppassowrd
@@ -16,8 +16,13 @@ def auth(eemail,ppassowrd):
     payload = {"email": eemail,
                "password": ppassowrd
                }
+    api=base_url.base_url_aw+"company/login"
+    print("****************|")
+    print("url",api)
+    print(eemail,ppassowrd)
+    print("****************|")
     session=requests.Session()
-    temp =session.post("http://54.186.118.166:3000/api/v1/en/company/login", data=payload)
+    temp =session.post(api, data=payload)
     # print("""auth called""")
     # print(temp.content)
     # print("respone messege ends here")
@@ -33,6 +38,8 @@ def auth(eemail,ppassowrd):
     #         print("Please provide valid login credentials.")
     #         print("Quiting Program...........")
     #         quit()
-
+    print(temp.json())
     return session
+
+auth("arsal.azeem@vizteck.com","12345678")
 
