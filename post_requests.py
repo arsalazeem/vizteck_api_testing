@@ -7,14 +7,12 @@ from faker import Faker
 import generate_random_images
 import get_data
 import pdb
+import inspect
 import brand_list
 import base_url
 import create_location
 
-# global session
-# session="undefined"
-# if session!="undefined":
-#     session = autheticate.auth("ragnor@yopmail.com", "12345678")
+
 
 # login()
 fake=Faker()
@@ -90,16 +88,11 @@ def create_asset(session,asset_range,email,password):
     for i in range(0, asset_range):
         post_asset(session,email,password)
         print("Asset Number=", i)
-    # except Exception as e:
-    #     print("create asset function",e)
+
 
 
 
 def post_departments(session,limit,email,password):
-    # session = autheticate.auth(email, password)
-    # print(session)
-    # pdb.set_trace()
-    print("this")
     for x in range(1,limit+1):
         payload = {
             "name": "Vizteck Department"+" "+str(x)
@@ -107,11 +100,10 @@ def post_departments(session,limit,email,password):
 
 
 
-        # try:
+
         response=session.post(base_url.base_url + "add/edit/departments", data=payload)
         print(response.content)
-        # except Exception as e:
-        #     print(e)
+
 
 
 

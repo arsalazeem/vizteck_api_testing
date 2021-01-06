@@ -12,6 +12,7 @@ import base_url
 
 
 
+
 # global session
 #
 # print(session)
@@ -55,11 +56,9 @@ def add_loc(session,nrange,email,password):
             "siteId": siteid
         }
 
-        # session = autheticate.auth(email, password)
+
         response = session.post(base_url.base_url + "company/signUp/add/site/locations", data=payload)
         print(response.json())
-#
-# add_site(200,"zarsalazeem@yopmail.com","12345678")
-# add_loc(10,"zarsalazeem@yopmail.com","12345678")
+
 
 
