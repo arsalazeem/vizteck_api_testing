@@ -1,7 +1,7 @@
 import pdb
 import random
 import string
-
+import companies_list
 def get_random_string(length):
     letters = string.ascii_lowercase
     result_str = ''.join(random.choice(letters) for i in range(length))
@@ -44,6 +44,8 @@ def generate_random_last_name():
     # seccond = random.choice(second)
     # name = (firrst + " " + seccond)
     # return name
+def generate_random_companies():
+    return random.choice(companies_list.comapnies_list)
 
 def generate_random_adress():
     area= ("Korangi", "Liaqatabad", "Nagin chorancgi", "Bhens cololony", "college road", "stadium road", "school road", "madina market", "Housing colony", "Rehamandbad", "Mughal pura", "Baghban Pura",

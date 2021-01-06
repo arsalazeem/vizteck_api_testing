@@ -12,12 +12,18 @@ import base_url
 
 
 
+# global session
+#
+# print(session)
+# pdb.set_trace()
+# # session=autheticate.auth("ragnor@yopmail.com","12345678")
 
-def _add_site(email,password):
+
+def _add_site(session,email,password):
     try:
         faker = Faker()
         payload = {
-            "name": generate_random_values.generate_random_adress(),
+            "name": generate_random_values.generate_random_companies(),
             "description": faker.text(),
             "address": generate_random_values.generate_random_adress(),
             "aptSuite": generate_random_values.generate_bad_zip_code(),
@@ -26,32 +32,34 @@ def _add_site(email,password):
             "postalCode": generate_random_values.generate_random_zipcodes(),
             "countryId": random.choice([1, 2, 3, 4, 5, 6, 7, 8])
         }
-        session = autheticate.auth(email, password)
-        response = session.post(base_url.base_url_aw + "company/signUp/add/sites", data=payload)
+        # session = autheticate.auth(email, password)
+        response = session.post(base_url.base_url + "company/signUp/add/sites", data=payload)
         print(response.json())
     except Exception as e:
         print(e)
 
-def add_site(upper_range,email,password):
+def add_site(session,upper_range,email,password):
     for i in range(0,upper_range):
-        _add_site(email,password)
+        _add_site(session,email,password)
         k=i
         print("Sites Added:",k)
     print("Done Adding Sites")
 
 
-def add_loc(email,password):
-    payload={
-        "name":generate_random_values.get_random_string(4),
-        "id":1
-    }
-    siteid=random.choice(get_data.get_sites_list(email,password))
-    print(siteid)
-    pdb.set_trace()
-    session=autheticate.auth(email,password)
-    response=session.post(base_url.base_url_aw+"company/signUp/add/site/locations?siteLocationId="+str(siteid),data=payload)
-    print(response.json())
+def add_loc(session,nrange,email,password):
+    # session = autheticate.auth(email, password)
+    for i in range(0, nrange):
+        siteid = random.choice(get_data.get_sites_list(session,email, password))
+        payload = {
+            "name": generate_random_values.generate_random_companies(),
+            "siteId": siteid
+        }
 
+        # session = autheticate.auth(email, password)
+        response = session.post(base_url.base_url + "company/signUp/add/site/locations", data=payload)
+        print(response.json())
+#
+# add_site(200,"zarsalazeem@yopmail.com","12345678")
+# add_loc(10,"zarsalazeem@yopmail.com","12345678")
 
-# add_loc("arsalanazeem@yopmail.com","12345678")
 

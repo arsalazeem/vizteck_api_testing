@@ -1,22 +1,20 @@
 import requests
 import sys
+import post_requests
 import base_url
-# def auth(n_requests,eemail,ppassowrd):
-#     payload = {"email": eemail,
-#                "password": ppassowrd
-#                }
-#     temp = n_requests.post("http://54.186.118.166:4000/api/v1/en/company/login", data=payload)
-#     # print("""auth called""")
-#     # print(temp.content)
-#     # print("respone messege ends here")
-#     # print(temp.content)
-#     return n_requests
+import pdb
+import inspect
 
 def auth(eemail,ppassowrd):
+    #
+    curframe = inspect.currentframe()
+    calframe = inspect.getouterframes(curframe, 2)
+    print('caller name:', calframe[1][3])
+    #
     payload = {"email": eemail,
                "password": ppassowrd
                }
-    api=base_url.base_url_aw+"company/login"
+    api= base_url.base_url + "company/login"
     print("****************|")
     print("url",api)
     print(eemail,ppassowrd)
@@ -41,5 +39,6 @@ def auth(eemail,ppassowrd):
     print(temp.json())
     return session
 
-auth("arsal.azeem@vizteck.com","12345678")
+# auth("arsal.azeem@vizteck.com","12345678")
 
+# auth("arsalanazeem@yopmail.com","12345678")

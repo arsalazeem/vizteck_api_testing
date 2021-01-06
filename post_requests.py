@@ -9,7 +9,14 @@ import get_data
 import pdb
 import brand_list
 import base_url
+import create_location
 
+# global session
+# session="undefined"
+# if session!="undefined":
+#     session = autheticate.auth("ragnor@yopmail.com", "12345678")
+
+# login()
 fake=Faker()
 description2_list=["In order to understand recursion, one must first understand recursion","Deleted code is debugged code","The best thing about a boolean is even if you are wrong, you are only off by a bit","It is a long established","There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature"]
 
@@ -35,9 +42,9 @@ def write_log(description,site_id,location_id,cat_id):
 
 
 
-def post_asset(email,password):
-    company_obj=get_data.get_company_id(email,password)
-    company_obj2=get_data.get_location_site_id(email,password)
+def post_asset(session,email,password):
+    company_obj=get_data.get_company_id(session,email,password)
+    company_obj2=get_data.get_location_site_id(session,email,password)
     # pdb.set_trace()
     payload = {
         "description": fake.text(),
@@ -68,30 +75,30 @@ def post_asset(email,password):
 
     write_log(payload["description"],payload["siteId"],payload["locationId"],payload["categoryId"])
     # session = requests.Session()
-    session=autheticate.auth(email, password)
+    # session=autheticate.auth(email, password)
     # pdb.set_trace()
     try:
-        response=session.post(base_url.base_url_aw+"asset/add-asset",data=payload, timeout=0.000000001)
+        response=session.post(base_url.base_url + "asset/add-asset", data=payload, timeout=0.000000001)
         print(response.content)
     except Exception as e:
         pass
 
 
 
-def create_asset(asset_range,email,password):
+def create_asset(session,asset_range,email,password):
     # try:
     for i in range(0, asset_range):
-        post_asset(email,password)
+        post_asset(session,email,password)
         print("Asset Number=", i)
     # except Exception as e:
     #     print("create asset function",e)
 
 
 
-def post_departments(limit,email,password):
-    session = autheticate.auth(email, password)
-    print(session)
-    pdb.set_trace()
+def post_departments(session,limit,email,password):
+    # session = autheticate.auth(email, password)
+    # print(session)
+    # pdb.set_trace()
     print("this")
     for x in range(1,limit+1):
         payload = {
@@ -101,7 +108,7 @@ def post_departments(limit,email,password):
 
 
         # try:
-        response=session.post(base_url.base_url_aw+"add/edit/departments", data=payload )
+        response=session.post(base_url.base_url + "add/edit/departments", data=payload)
         print(response.content)
         # except Exception as e:
         #     print(e)
@@ -111,8 +118,12 @@ def post_departments(limit,email,password):
 
 # print(return_cost())
 #methods
-# create_asset(50,"arsalanazeem@yopmail.com","12345678")
-post_departments(9999,"arsal.azeem@vizteck.com","12345678")
+# if __name__ == "__main__":
+# get_data.get_sites_list("arsalanazeem@yopmail.com","12345678")
+# create_location.add_site(2,"ragnor@yopmail.com","12345678")
+# create_location.add_loc(100,"ragnor@yopmail.com","12345678")
+# post_departments(2,"arsal.azeem@vizteck.com","12345678")
+# create_asset(100,"ragnor@yopmail.com","12345678")
 
 
 
