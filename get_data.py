@@ -48,7 +48,7 @@ def return_list(list,keyname):
 
 
 
-def get_sites_list(session,email,password):
+def get_sites_list(session):
     #
     curframe = inspect.currentframe()
     calframe = inspect.getouterframes(curframe, 2)
@@ -68,11 +68,11 @@ def get_sites_list(session,email,password):
     # pdb.set_trace()
     return locations_id
 
-def get_location_site_id(session,email,password):
+def get_location_site_id(session):
    try:
        location_id = []
        locationn_id=[]
-       site_id = random.choice(get_sites_list(session,email, password))
+       site_id = random.choice(get_sites_list(session))
        print(site_id)
        # pdb.set_trace()
        # s = autheticate.auth(email, password)
@@ -91,7 +91,7 @@ def get_location_site_id(session,email,password):
        # pdb.set_trace()
    except Exception as e:
        print("There is something wrong in get location site id")
-       get_location_site_id(session,email,password)
+       get_location_site_id(session)
 
    return {"site_id": site_id, "location_id": locationn_id}
 
@@ -100,7 +100,7 @@ def get_location_site_id(session,email,password):
 #site/locations/:siteId
 
 
-def get_company_id(session,email,password):
+def get_company_id(session):
     # s = autheticate.auth(email, password)
     response = session.get(base_url.base_url + "departments/sites")
     temp=response.json()

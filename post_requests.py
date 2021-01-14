@@ -40,12 +40,12 @@ def write_log(description,site_id,location_id,cat_id):
 
 
 
-def post_asset(session,email,password):
-    company_obj=get_data.get_company_id(session,email,password)
-    company_obj2=get_data.get_location_site_id(session,email,password)
+def post_asset(session):
+    company_obj=get_data.get_company_id(session)
+    company_obj2=get_data.get_location_site_id(session)
     # pdb.set_trace()
     payload = {
-        "description": fake.text(),
+        "description": brand_list.return_brand(),
         "tagId": generate_random_values.generate_phone_number(),
         "siteId": company_obj2["site_id"],
         "locationId":company_obj2["location_id"],
@@ -83,16 +83,16 @@ def post_asset(session,email,password):
 
 
 
-def create_asset(session,asset_range,email,password):
+def create_asset(session,asset_range):
     # try:
     for i in range(0, asset_range):
-        post_asset(session,email,password)
+        post_asset(session)
         print("Asset Number=", i)
 
 
 
 
-def post_departments(session,limit,email,password):
+def post_departments(session,limit):
     for x in range(1,limit+1):
         payload = {
             "name": "Vizteck Department"+" "+str(x)

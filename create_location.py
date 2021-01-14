@@ -20,7 +20,7 @@ import base_url
 # # session=autheticate.auth("ragnor@yopmail.com","12345678")
 
 
-def _add_site(session,email,password):
+def _add_site(session):
     try:
         faker = Faker()
         payload = {
@@ -39,18 +39,18 @@ def _add_site(session,email,password):
     except Exception as e:
         print(e)
 
-def add_site(session,upper_range,email,password):
+def add_site(session,upper_range):
     for i in range(0,upper_range):
-        _add_site(session,email,password)
+        _add_site(session)
         k=i
         print("Sites Added:",k)
     print("Done Adding Sites")
 
 
-def add_loc(session,nrange,email,password):
-    # session = autheticate.auth(email, password)
+def add_loc(session,nrange):
+
     for i in range(0, nrange):
-        siteid = random.choice(get_data.get_sites_list(session,email, password))
+        siteid = random.choice(get_data.get_sites_list(session))
         payload = {
             "name": generate_random_values.generate_random_companies(),
             "siteId": siteid
