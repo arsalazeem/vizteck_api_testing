@@ -88,7 +88,7 @@ def get_location_site_id(session,email,password):
        # pdb.set_trace()
        locationn_id = random.choice(location_id)
        print(site_id)
-       pdb.set_trace()
+       # pdb.set_trace()
    except Exception as e:
        print("There is something wrong in get location site id")
        get_location_site_id(session,email,password)
